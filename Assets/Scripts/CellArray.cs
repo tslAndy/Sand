@@ -78,7 +78,8 @@ public enum CellType
     Stone = 32,
     Acid = 64,
     Oil = 128,
-    Wood = 256
+    Wood = 256,
+    FiringMaterial = 512
 }
 
 public enum AcidState

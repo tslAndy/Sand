@@ -27,6 +27,7 @@ public unsafe class SimulationDrawer : MonoBehaviour
 		{CellType.Oil, Color.green},
 		{CellType.Wood, (Color.red + Color.yellow) * 0.3f},
 		{CellType.Fire, (Color.red + Color.yellow) * 0.5f},
+		{CellType.FiringMaterial, (Color.red + Color.yellow* 0.5f) },
 	};
 
 	private IEnumerator LengthCoroutine()

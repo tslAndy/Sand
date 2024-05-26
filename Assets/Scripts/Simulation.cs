@@ -55,6 +55,10 @@ public unsafe class Simulation : MonoBehaviour
                     UpdateFire(cell);
                     break;
 
+                case CellType.FiringMaterial:
+                    UpdateFiringMaterial(cell);
+                    break;
+
 
                 default:
                     break;
@@ -197,7 +201,7 @@ public unsafe class Simulation : MonoBehaviour
     // TODO fix fire
     private void UpdateFire(Cell* cellPtr)
     {
-        if (cellPtr->lifetime == 200)
+        if (cellPtr->lifetime == 100)
         {
             Remove(cellPtr->x, cellPtr->y);
             return;
@@ -208,32 +212,44 @@ public unsafe class Simulation : MonoBehaviour
         int x = cellPtr->x;
         int y = cellPtr->y;
 
-        void TryFire(int tx, int ty)
+        // try to fire smth around
+        for (int i = 0; i < 5; i++)
         {
-            if (!HasType(tx, ty, destroyableByFire)) return;
-            cellGrid[ty, tx]->cellType = CellType.Fire;
-        }
+            int tx = x + Random.Range(-1, 2);
+            int ty = y + Random.Range(-1, 2);
 
-
-        // TODO gas and fire behaviour
-
-        // control speed of firing materials
-        if (cellPtr->lifetime > 50)
-        {
-            TryFire(x - 1, y + 1);
-            TryFire(x, y + 1);
-            TryFire(x + 1, y + 1);
-
-            TryFire(x - 1, y);
-            TryFire(x + 1, y);
-
-            TryFire(x - 1, y - 1);
-            TryFire(x, y - 1);
-            TryFire(x + 1, y - 1);
+            if (!HasType(tx, ty, destroyableByFire)) continue;
+            cellGrid[ty, tx]->cellType = CellType.FiringMaterial;
         }
 
         TrySwap(ref x, ref y, x + Random.Range(-1, 2), y + 1, swapWithFire);
     }
+
+    private void UpdateFiringMaterial(Cell* cellPtr)
+    {
+        cellPtr->lifetime++;
+        if (cellPtr->lifetime == 50)
+        {
+            cellPtr->cellType = CellType.Fire;
+            return;
+        }
+
+        int x = cellPtr->x;
+        int y = cellPtr->y;
+
+        // try to spawn fire around
+        for (int i = 0; i < 5; i++)
+        {
+            if (Random.Range(0, 100) > 5) continue;
+
+            int tx = x + Random.Range(-1, 2);
+            int ty = y + Random.Range(-1, 2);
+            if (!HasType(tx, ty, CellType.Empty)) return;
+            Add(tx, ty, CellType.Fire);
+        }
+
+    }
+
     #endregion
 
 
@@ -246,8 +262,8 @@ public unsafe class Simulation : MonoBehaviour
 
         cellGrid.SwapCells(x1, y1, x2, y2);
 
-        (x1, x2) = (x2, x1);
-        (y1, y2) = (y2, y1);
+        x1 = x2;
+        y1 = y2;
 
         return true;
     }
