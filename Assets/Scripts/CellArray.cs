@@ -53,13 +53,18 @@ public unsafe class CellArray
 public struct Cell
 {
     public int x, y;
+    public int vx, vy;
     public CellType cellType;
     public int lifetime;
 
-    public Cell(int x, int y, CellType cellType, int lifetime = 0)
+    public Cell(int x, int y, CellType cellType, int lifetime = 0, int vx = 0, int vy = 0)
     {
         this.x = x;
         this.y = y;
+
+        this.vx = vx;
+        this.vy = vy;
+
         this.cellType = cellType;
         this.lifetime = lifetime;
     }
@@ -79,7 +84,8 @@ public enum CellType
     Acid = 64,
     Oil = 128,
     Wood = 256,
-    FiringMaterial = 512
+    FiringMaterial = 512,
+    Explosion = 1024
 }
 
 public enum AcidState
