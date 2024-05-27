@@ -81,7 +81,8 @@ public enum CellType
     Oil = 128,
     Wood = 256,
     FiringMaterial = 512,
-    Explosion = 1024
+    Explosion = 1024,
+    Smoke = 2048
 }
 
 public enum AcidState

@@ -23,6 +23,8 @@ public unsafe class Simulation : MonoBehaviour
     private const CellType canDetonate = CellType.Gas;
     private const CellType throwableByDetonation = CellType.Gas;
 
+    private const CellType swapWithSmoke = CellType.Empty | CellType.Sand | CellType.Water | CellType.Gas | CellType.Fire | CellType.Acid | CellType.Oil;
+
 
     #endregion
 
@@ -67,6 +69,10 @@ public unsafe class Simulation : MonoBehaviour
                     UpdateExplosion(cell);
                     break;
 
+                case CellType.Smoke:
+                    UpdateSmoke(cell);
+                    break;
+
 
                 default:
                     break;
@@ -74,52 +80,7 @@ public unsafe class Simulation : MonoBehaviour
         }
     }
 
-    private void UpdateExplosion(Cell* cellPtr)
-    {
-        int x = cellPtr->x;
-        int y = cellPtr->y;
 
-        int generation = cellPtr->lifetime;
-
-        //ExplodeInDirection(x, y, vx, vy);
-
-        int dx = (int)Mathf.Sign(Random.Range(-1, 2));
-        int dy = (int)Mathf.Sign(Random.Range(-1, 2));
-        ExplodeInDirection(x, y, dx, dy);
-
-        dx = (int)Mathf.Sign(Random.Range(-1, 2));
-        dy = (int)Mathf.Sign(Random.Range(-1, 2));
-        ExplodeInDirection(x, y, dx, dy);
-
-        if (generation < 20) Remove(x, y);
-        else cellPtr->cellType = CellType.Fire;
-    }
-
-    // x and y is coord of explosion
-    private void ExplodeInDirection(int x, int y, int dx, int dy)
-    {
-        var tx = x + dx;
-        var ty = y + dy;
-        int generation = cellGrid[y, x]->lifetime;
-        bool isLastGeneration = generation == 20;
-
-        if (!isLastGeneration &&
-            HasType(tx, ty, CellType.Empty))
-        {
-            Add(tx, ty, CellType.Explosion);
-            Cell* explodedPtr = cellGrid[ty, tx];
-            // first generation
-            explodedPtr->lifetime = generation + 1;
-        }
-        if (!isLastGeneration &&
-            HasType(tx, ty, throwableByDetonation) &&
-            HasType(tx + dx, ty + dy, CellType.Empty))
-        {
-            cellGrid.SwapCells(tx, ty, tx + dx, ty + dy);
-        }
-
-
-    }
 
     #region Update Methods
     private void UpdateSand(Cell* cellPtr)
@@ -253,19 +214,23 @@ public unsafe class Simulation : MonoBehaviour
         TrySwap(ref x, ref y, x + dx, y + dy, swapWithGas);
     }
 
-
     private void UpdateFire(Cell* cellPtr)
     {
+        int x = cellPtr->x;
+        int y = cellPtr->y;
+
         if (cellPtr->lifetime == 100)
         {
-            Remove(cellPtr->x, cellPtr->y);
+            if (Random.Range(0, 100) < 20)
+                cellPtr->cellType = CellType.Smoke;
+            else
+                Remove(x, y);
             return;
         }
 
         cellPtr->lifetime++;
 
-        int x = cellPtr->x;
-        int y = cellPtr->y;
+
 
         // try to fire smth around
         for (int i = 0; i < 5; i++)
@@ -310,6 +275,68 @@ public unsafe class Simulation : MonoBehaviour
 
     }
 
+    private void UpdateExplosion(Cell* cellPtr)
+    {
+        int x = cellPtr->x;
+        int y = cellPtr->y;
+
+        int generation = cellPtr->lifetime;
+
+        //ExplodeInDirection(x, y, vx, vy);
+
+        int dx = (int)Mathf.Sign(Random.Range(-1, 2));
+        int dy = (int)Mathf.Sign(Random.Range(-1, 2));
+        ExplodeInDirection(x, y, dx, dy);
+
+        dx = (int)Mathf.Sign(Random.Range(-1, 2));
+        dy = (int)Mathf.Sign(Random.Range(-1, 2));
+        ExplodeInDirection(x, y, dx, dy);
+
+        if (generation < 20) Remove(x, y);
+        else cellPtr->cellType = CellType.Fire;
+    }
+
+    // x and y is coord of explosion
+    private void ExplodeInDirection(int x, int y, int dx, int dy)
+    {
+        var tx = x + dx;
+        var ty = y + dy;
+        int generation = cellGrid[y, x]->lifetime;
+        bool isLastGeneration = generation == 20;
+
+        if (!isLastGeneration &&
+            HasType(tx, ty, CellType.Empty))
+        {
+            Add(tx, ty, CellType.Explosion);
+            Cell* explodedPtr = cellGrid[ty, tx];
+            // first generation
+            explodedPtr->lifetime = generation + 1;
+        }
+        if (!isLastGeneration &&
+            HasType(tx, ty, throwableByDetonation) &&
+            HasType(tx + dx, ty + dy, CellType.Empty))
+        {
+            cellGrid.SwapCells(tx, ty, tx + dx, ty + dy);
+        }
+    }
+
+    private void UpdateSmoke(Cell* cellPtr)
+    {
+        int x = cellPtr->x;
+        int y = cellPtr->y;
+
+        for (int i = 0; i < 3; i++)
+        {
+            int direction = Random.Range(-1, 2);
+            if (TrySwap(ref x, ref y, x + direction, y + 1, swapWithSmoke)) { }
+            else if (TrySwap(ref x, ref y, x - direction, y + 1, swapWithSmoke)) { }
+            else
+            {
+                Remove(x, y);
+                break;
+            }
+        }
+    }
     #endregion
 
 
