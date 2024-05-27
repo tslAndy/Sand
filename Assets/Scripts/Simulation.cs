@@ -25,6 +25,8 @@ public unsafe class Simulation : MonoBehaviour
 
     private const CellType swapWithSmoke = CellType.Empty | CellType.Sand | CellType.Water | CellType.Gas | CellType.Fire | CellType.Acid | CellType.Oil;
 
+    private const CellType swapWithStone = CellType.Empty | CellType.Water | CellType.Gas | CellType.Fire | CellType.Acid | CellType.Oil;
+
 
     #endregion
 
@@ -73,6 +75,9 @@ public unsafe class Simulation : MonoBehaviour
                     UpdateSmoke(cell);
                     break;
 
+                case CellType.Stone:
+                    UpdateStone(cell);
+                    break;
 
                 default:
                     break;
@@ -335,6 +340,18 @@ public unsafe class Simulation : MonoBehaviour
                 Remove(x, y);
                 break;
             }
+        }
+    }
+
+    private void UpdateStone(Cell* cellPtr)
+    {
+        int x = cellPtr->x;
+        int y = cellPtr->y;
+
+        for (int i = 0; i < 9; i++)
+        {
+            if (TrySwap(ref x, ref y, x, y - 1, swapWithStone)) { }
+            else break;
         }
     }
     #endregion

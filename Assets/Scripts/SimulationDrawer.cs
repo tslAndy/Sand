@@ -22,7 +22,7 @@ public unsafe class SimulationDrawer : MonoBehaviour
 		{CellType.Sand, Color.yellow},
 		{CellType.Water, Color.blue},
 		{CellType.Gas, Color.red},
-		{CellType.Stone, Color.gray},
+		{CellType.Wall, Color.gray},
 		{CellType.Acid, Color.magenta},
 		{CellType.Oil, Color.green},
 		{CellType.Wood, (Color.red + Color.yellow) * 0.3f},
@@ -30,6 +30,7 @@ public unsafe class SimulationDrawer : MonoBehaviour
 		{CellType.FiringMaterial, (Color.red + Color.yellow) * 0.5f },
 		{CellType.Explosion, Color.red },
 		{CellType.Smoke, Color.white },
+		{CellType.Stone, Color.white * 0.7f },
 	};
 
 	private IEnumerator LengthCoroutine()
@@ -114,10 +115,11 @@ public unsafe class SimulationDrawer : MonoBehaviour
 	public void SetSand() => _cellType = CellType.Sand;
 	public void SetGas() => _cellType = CellType.Gas;
 	public void SetWater() => _cellType = CellType.Water;
-	public void SetStone() => _cellType = CellType.Stone;
+	public void SetWall() => _cellType = CellType.Wall;
 	public void SetErase() => _cellType = CellType.Empty;
 	public void SetAcid() => _cellType = CellType.Acid;
 	public void SetWood() => _cellType = CellType.Wood;
 	public void SetOil() => _cellType = CellType.Oil;
 	public void SetFire() => _cellType = CellType.Fire;
+	public void SetStone() => _cellType = CellType.Stone;
 }
