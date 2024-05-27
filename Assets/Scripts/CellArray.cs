@@ -53,17 +53,13 @@ public unsafe class CellArray
 public struct Cell
 {
     public int x, y;
-    public int vx, vy;
     public CellType cellType;
     public int lifetime;
 
-    public Cell(int x, int y, CellType cellType, int lifetime = 0, int vx = 0, int vy = 0)
+    public Cell(int x, int y, CellType cellType, int lifetime = 0)
     {
         this.x = x;
         this.y = y;
-
-        this.vx = vx;
-        this.vy = vy;
 
         this.cellType = cellType;
         this.lifetime = lifetime;

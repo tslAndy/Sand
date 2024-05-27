@@ -79,9 +79,6 @@ public unsafe class Simulation : MonoBehaviour
         int x = cellPtr->x;
         int y = cellPtr->y;
 
-        int vx = cellPtr->vx;
-        int vy = cellPtr->vy;
-
         int generation = cellPtr->lifetime;
 
         //ExplodeInDirection(x, y, vx, vy);
@@ -111,10 +108,6 @@ public unsafe class Simulation : MonoBehaviour
         {
             Add(tx, ty, CellType.Explosion);
             Cell* explodedPtr = cellGrid[ty, tx];
-
-            explodedPtr->vx = dx;
-            explodedPtr->vy = dy;
-
             // first generation
             explodedPtr->lifetime = generation + 1;
         }
@@ -286,8 +279,6 @@ public unsafe class Simulation : MonoBehaviour
             {
                 Cell* explodedPtr = cellGrid[ty, tx];
                 explodedPtr->cellType = CellType.Explosion;
-                explodedPtr->vx = tx - x;
-                explodedPtr->vy = ty - y;
             }
         }
 
