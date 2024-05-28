@@ -8,29 +8,6 @@ public unsafe class Simulation : MonoBehaviour
     public CellArray cellArray = new();
     public CellGrid cellGrid = new();
 
-
-    #region swap constants
-    private const CellType swapWithSand = CellType.Empty | CellType.Water | CellType.Gas | CellType.Oil;
-    private const CellType swapWithWater = CellType.Empty | CellType.Oil | CellType.Gas;
-    private const CellType swapWithGas = CellType.Empty;
-    private const CellType swapWithOil = CellType.Empty | CellType.Gas;
-
-    private const CellType destroyableByAcid = CellType.Sand | CellType.Water | CellType.Oil | CellType.Wood;
-    private const CellType swapWithAcid = CellType.Empty | CellType.Gas;
-
-    private const CellType swapWithFire = CellType.Empty;
-    private const CellType canFire = CellType.Oil | CellType.Wood;
-    private const CellType canDetonate = CellType.Gas;
-    private const CellType throwableByDetonation = CellType.Gas;
-
-    private const CellType swapWithSmoke = CellType.Empty | CellType.Sand | CellType.Water | CellType.Gas | CellType.Fire | CellType.Acid | CellType.Oil;
-
-    private const CellType swapWithStone = CellType.Empty | CellType.Water | CellType.Gas | CellType.Fire | CellType.Acid | CellType.Oil;
-
-
-    #endregion
-
-
     public void Update()
     {
         for (int i = 0; i < cellArray.Length; i++)
@@ -79,12 +56,15 @@ public unsafe class Simulation : MonoBehaviour
                     UpdateStone(cell);
                     break;
 
+                case CellType.Ice:
+                    UpdateIce(cell);
+                    break;
+
                 default:
                     break;
             }
         }
     }
-
 
 
     #region Update Methods
@@ -95,9 +75,9 @@ public unsafe class Simulation : MonoBehaviour
 
         for (int i = 0; i < 9; i++)
         {
-            if (TrySwap(ref x, ref y, x, y - 1, swapWithSand)) { }
-            else if (TrySwap(ref x, ref y, x - 1, y - 1, swapWithSand)) { }
-            else if (TrySwap(ref x, ref y, x + 1, y - 1, swapWithSand)) { }
+            if (TrySwap(ref x, ref y, x, y - 1, Constants.SwapWithSand)) { }
+            else if (TrySwap(ref x, ref y, x - 1, y - 1, Constants.SwapWithSand)) { }
+            else if (TrySwap(ref x, ref y, x + 1, y - 1, Constants.SwapWithSand)) { }
             else break;
         }
     }
@@ -111,12 +91,12 @@ public unsafe class Simulation : MonoBehaviour
 
         for (int i = 0; i < 9; i++)
         {
-            if (TrySwap(ref x, ref y, x, y - 1, swapWithWater)) { }
-            else if (TrySwap(ref x, ref y, x + direction, y - 1, swapWithWater)) { }
-            else if (TrySwap(ref x, ref y, x - direction, y - 1, swapWithWater))
+            if (TrySwap(ref x, ref y, x, y - 1, Constants.SwapWithWater)) { }
+            else if (TrySwap(ref x, ref y, x + direction, y - 1, Constants.SwapWithWater)) { }
+            else if (TrySwap(ref x, ref y, x - direction, y - 1, Constants.SwapWithWater))
                 direction = -direction;
-            else if (TrySwap(ref x, ref y, x + direction, y, swapWithWater)) { }
-            else if (TrySwap(ref x, ref y, x - direction, y, swapWithWater))
+            else if (TrySwap(ref x, ref y, x + direction, y, Constants.SwapWithWater)) { }
+            else if (TrySwap(ref x, ref y, x - direction, y, Constants.SwapWithWater))
                 direction = -direction;
             else break;
         }
@@ -131,12 +111,12 @@ public unsafe class Simulation : MonoBehaviour
 
         for (int i = 0; i < 9; i++)
         {
-            if (TrySwap(ref x, ref y, x, y - 1, swapWithOil)) { }
-            else if (TrySwap(ref x, ref y, x + direction, y - 1, swapWithOil)) { }
-            else if (TrySwap(ref x, ref y, x - direction, y - 1, swapWithOil))
+            if (TrySwap(ref x, ref y, x, y - 1, Constants.SwapWithOil)) { }
+            else if (TrySwap(ref x, ref y, x + direction, y - 1, Constants.SwapWithOil)) { }
+            else if (TrySwap(ref x, ref y, x - direction, y - 1, Constants.SwapWithOil))
                 direction = -direction;
-            else if (TrySwap(ref x, ref y, x + direction, y, swapWithOil)) { }
-            else if (TrySwap(ref x, ref y, x - direction, y, swapWithOil))
+            else if (TrySwap(ref x, ref y, x + direction, y, Constants.SwapWithOil)) { }
+            else if (TrySwap(ref x, ref y, x - direction, y, Constants.SwapWithOil))
                 direction = -direction;
             else break;
         }
@@ -153,7 +133,7 @@ public unsafe class Simulation : MonoBehaviour
             if (tx < 0 || tx > 511 || ty < 0 || ty > 511) return AcidState.Nothing;
 
 
-            if (HasType(tx, ty, swapWithAcid))
+            if (HasType(tx, ty, Constants.SwapWithAcid))
             {
                 cellGrid.SwapCells(x, y, tx, ty);
                 x = tx;
@@ -161,7 +141,7 @@ public unsafe class Simulation : MonoBehaviour
                 return AcidState.Moved;
             }
 
-            if (HasType(tx, ty, destroyableByAcid))
+            if (HasType(tx, ty, Constants.DestroyableByAcid))
             {
                 Remove(x, y);
                 Remove(tx, ty);
@@ -196,7 +176,7 @@ public unsafe class Simulation : MonoBehaviour
             if (acidState == AcidState.Moved) continue;
 
             // if can destroy cell up
-            if (HasType(x, y + 1, destroyableByAcid))
+            if (HasType(x, y + 1, Constants.DestroyableByAcid))
             {
                 Remove(x, y);
                 Remove(x, y + 1);
@@ -216,7 +196,7 @@ public unsafe class Simulation : MonoBehaviour
         int dx = Random.Range(-1, 2);
         int dy = Random.Range(-1, 2);
 
-        TrySwap(ref x, ref y, x + dx, y + dy, swapWithGas);
+        TrySwap(ref x, ref y, x + dx, y + dy, Constants.SwapWithGas);
     }
 
     private void UpdateFire(Cell* cellPtr)
@@ -235,24 +215,22 @@ public unsafe class Simulation : MonoBehaviour
 
         cellPtr->lifetime++;
 
-
-
         // try to fire smth around
         for (int i = 0; i < 5; i++)
         {
             int tx = x + Random.Range(-1, 2);
             int ty = y + Random.Range(-1, 2);
 
-            if (HasType(tx, ty, canFire))
+            if (HasType(tx, ty, Constants.CanFire))
                 cellGrid[ty, tx]->cellType = CellType.FiringMaterial;
-            else if (HasType(tx, ty, canDetonate))
+            else if (HasType(tx, ty, Constants.CanDetonate))
             {
                 Cell* explodedPtr = cellGrid[ty, tx];
                 explodedPtr->cellType = CellType.Explosion;
             }
         }
 
-        TrySwap(ref x, ref y, x + Random.Range(-1, 2), y + 1, swapWithFire);
+        TrySwap(ref x, ref y, x + Random.Range(-1, 2), y + 1, Constants.SwapWithFire);
     }
 
     private void UpdateFiringMaterial(Cell* cellPtr)
@@ -318,7 +296,7 @@ public unsafe class Simulation : MonoBehaviour
             explodedPtr->lifetime = generation + 1;
         }
         if (!isLastGeneration &&
-            HasType(tx, ty, throwableByDetonation) &&
+            HasType(tx, ty, Constants.ThrowableByDetonation) &&
             HasType(tx + dx, ty + dy, CellType.Empty))
         {
             cellGrid.SwapCells(tx, ty, tx + dx, ty + dy);
@@ -333,8 +311,8 @@ public unsafe class Simulation : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             int direction = Random.Range(-1, 2);
-            if (TrySwap(ref x, ref y, x + direction, y + 1, swapWithSmoke)) { }
-            else if (TrySwap(ref x, ref y, x - direction, y + 1, swapWithSmoke)) { }
+            if (TrySwap(ref x, ref y, x + direction, y + 1, Constants.SwapWithSmoke)) { }
+            else if (TrySwap(ref x, ref y, x - direction, y + 1, Constants.SwapWithSmoke)) { }
             else
             {
                 Remove(x, y);
@@ -350,10 +328,40 @@ public unsafe class Simulation : MonoBehaviour
 
         for (int i = 0; i < 9; i++)
         {
-            if (TrySwap(ref x, ref y, x, y - 1, swapWithStone)) { }
+            if (TrySwap(ref x, ref y, x, y - 1, Constants.SwapWithStone)) { }
             else break;
         }
     }
+
+
+    private void UpdateIce(Cell* cellPtr)
+    {
+        if (cellPtr->lifetime < 40)
+        {
+            cellPtr->lifetime++;
+            return;
+        }
+
+        int x = cellPtr->x;
+        int y = cellPtr->y;
+
+        //if (Random.Range(0, 100) > 20) return;
+
+        int steps = Random.Range(0, 10);
+        for (int i = 0; i < steps; i++)
+        {
+            x += Random.Range(-1, 2);
+            y += Random.Range(-1, 2);
+            if (HasType(x, y, CellType.Water))
+                cellGrid[y, x]->cellType = CellType.Ice;
+        }
+    }
+
+    private void TryFreeze(int x, int y)
+    {
+
+    }
+
     #endregion
 
 

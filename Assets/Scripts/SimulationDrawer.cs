@@ -31,6 +31,7 @@ public unsafe class SimulationDrawer : MonoBehaviour
 		{CellType.Explosion, Color.red },
 		{CellType.Smoke, Color.white },
 		{CellType.Stone, Color.white * 0.7f },
+		{CellType.Ice, (Color.white + Color.blue) * 0.7f },
 	};
 
 	private IEnumerator LengthCoroutine()
@@ -122,4 +123,5 @@ public unsafe class SimulationDrawer : MonoBehaviour
 	public void SetOil() => _cellType = CellType.Oil;
 	public void SetFire() => _cellType = CellType.Fire;
 	public void SetStone() => _cellType = CellType.Stone;
+	public void SetIce() => _cellType = CellType.Ice;
 }
