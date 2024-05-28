@@ -1,0 +1,5 @@
+- [ ] Random position with random between -1 and 1
+- [ ] Remove lifetime, add an extension
+- [ ] Colors
+- [ ] Fix acid
+- [ ] Remake fire, smoke and explosion

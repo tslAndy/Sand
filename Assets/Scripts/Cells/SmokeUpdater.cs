@@ -21,7 +21,7 @@ public unsafe class SmokeUpdater : CellUpdater
 
         for (int i = 0; i < 3; i++)
         {
-            int direction = Random.Range(-1, 2);
+            int direction = RandomPosition.PlusMinusOne(0);
             if (simulation.TrySwap(ref x, ref y, x + direction, y + 1, SwapWithSmoke)) { }
             else if (simulation.TrySwap(ref x, ref y, x - direction, y + 1, SwapWithSmoke)) { }
             else

@@ -30,8 +30,7 @@ public unsafe class FireUpdater : CellUpdater
         // try to fire smth around
         for (int i = 0; i < 5; i++)
         {
-            int tx = x + Random.Range(-1, 2);
-            int ty = y + Random.Range(-1, 2);
+            RandomPosition.GetRandomAround(x, y, out int tx, out int ty);
 
             if (simulation.HasType(tx, ty, CanFire))
                 simulation.cellGrid[ty, tx]->cellType = CellType.FiringMaterial;
@@ -42,6 +41,6 @@ public unsafe class FireUpdater : CellUpdater
             }
         }
 
-        simulation.TrySwap(ref x, ref y, x + Random.Range(-1, 2), y + 1, SwapWithFire);
+        simulation.TrySwap(ref x, ref y, RandomPosition.PlusMinusOne(x), y + 1, SwapWithFire);
     }
 }

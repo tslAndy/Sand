@@ -22,8 +22,7 @@ public unsafe class FiringMaterialUpdater : CellUpdater
         {
             if (Random.Range(0, 100) > 5) continue;
 
-            int tx = x + Random.Range(-1, 2);
-            int ty = y + Random.Range(-1, 2);
+            RandomPosition.GetRandomAround(x, y, out int tx, out int ty);
             if (!simulation.HasType(tx, ty, CellType.Empty)) return;
             simulation.Add(tx, ty, CellType.Fire);
         }

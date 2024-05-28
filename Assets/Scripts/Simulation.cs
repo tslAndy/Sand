@@ -8,7 +8,6 @@ public unsafe class Simulation : MonoBehaviour
     public CellArray cellArray = new();
     public CellGrid cellGrid = new();
 
-    // TODO random position with random between -1 and 1
 
     // some types of cells use loops for update
     // as here f. e. if (TrySwap(ref x, ref y, x, y - 1, swapWithSand)) { }

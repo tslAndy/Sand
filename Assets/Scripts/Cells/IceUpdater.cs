@@ -22,10 +22,13 @@ public unsafe class IceUpdater : CellUpdater
         int steps = Random.Range(0, 10);
         for (int i = 0; i < steps; i++)
         {
-            x += Random.Range(-1, 2);
-            y += Random.Range(-1, 2);
-            if (simulation.HasType(x, y, CellType.Water))
-                simulation.cellGrid[y, x]->cellType = CellType.Ice;
+            RandomPosition.GetRandomAround(x, y, out int tx, out int ty);
+            if (simulation.HasType(tx, ty, CellType.Water))
+            {
+                simulation.cellGrid[ty, tx]->cellType = CellType.Ice;
+                x = tx;
+                y = ty;
+            }
         }
     }
 }

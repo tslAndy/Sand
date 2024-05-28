@@ -12,9 +12,8 @@ public unsafe class GasUpdater : CellUpdater
         int x = cellPtr->x;
         int y = cellPtr->y;
 
-        int dx = Random.Range(-1, 2);
-        int dy = Random.Range(-1, 2);
+        RandomPosition.GetRandomAround(x, y, out int tx, out int ty);
 
-        simulation.TrySwap(ref x, ref y, x + dx, y + dy, SwapWithGas);
+        simulation.TrySwap(ref x, ref y, tx, ty, SwapWithGas);
     }
 }
