@@ -11,44 +11,11 @@ public unsafe class SimulationDrawer : MonoBehaviour
 	[SerializeField] private Texture2D texture;
 	[SerializeField] private int brushRadius;
 	[SerializeField] private Simulation simulation;
+	[SerializeField] private SimulationUpdater simulationUpdater;
 
 	private CellType _cellType = CellType.Sand;
 	private Color[] colors = new Color[262_144];
 
-	// TODO add color randomization
-
-	private readonly Dictionary<CellType, Color> cellColors = new()
-	{
-		{CellType.Sand, Color.yellow},
-		{CellType.Water, Color.blue},
-		{CellType.Gas, Color.red},
-		{CellType.Wall, Color.gray},
-		{CellType.Acid, Color.magenta},
-		{CellType.Oil, Color.green},
-		{CellType.Wood, (Color.red + Color.yellow) * 0.3f},
-		{CellType.Fire, (Color.red + Color.yellow) * 0.5f},
-		{CellType.FiringMaterial, (Color.red + Color.yellow) * 0.5f },
-		{CellType.Explosion, Color.red },
-		{CellType.Smoke, Color.white },
-		{CellType.Stone, Color.white * 0.7f },
-		{CellType.Ice, (Color.white + Color.blue) * 0.7f },
-	};
-
-	private IEnumerator LengthCoroutine()
-	{
-		var delay = new WaitForSeconds(1f);
-		for (; ; )
-		{
-			Debug.Log(simulation.cellArray.Length);
-			yield return delay;
-		}
-
-	}
-
-	private void Start()
-	{
-		StartCoroutine(LengthCoroutine());
-	}
 
 
 	private void Update()
@@ -74,7 +41,7 @@ public unsafe class SimulationDrawer : MonoBehaviour
 				{
 					Cell* cell = simulation.cellArray[i];
 					var index = ((cell->y << 9) + cell->x);
-					var color = cellColors[cell->cellType];
+					var color = simulationUpdater.cellUpdaters[cell->cellType].GetColor();
 					colors[index] = color;
 				}
 			}

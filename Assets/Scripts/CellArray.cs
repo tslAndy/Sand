@@ -87,9 +87,3 @@ public enum CellType
     Ice = 8192
 }
 
-public enum AcidState
-{
-    Nothing,
-    Moved,
-    Destroyed
-}
