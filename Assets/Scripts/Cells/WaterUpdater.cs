@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public unsafe class WaterUpdater : CellUpdater
 {
     private const CellType SwapWithWater = CellType.Empty |
@@ -8,9 +9,11 @@ public unsafe class WaterUpdater : CellUpdater
 
     public WaterUpdater(Simulation simulation) : base(simulation) { }
 
-    public override Color GetColor() => Color.blue;
+    public override Color GetColor() => rng.NextFloat(0.8f, 1f) * Color.blue;
+
     public override void Update(Cell* cellPtr)
     {
+
         int x = cellPtr->x;
         int y = cellPtr->y;
 

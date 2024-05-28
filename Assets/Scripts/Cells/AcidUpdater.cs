@@ -11,7 +11,7 @@ public unsafe class AcidUpdater : CellUpdater
 
     public AcidUpdater(Simulation simulation) : base(simulation) { }
 
-    public override Color GetColor() => Color.magenta;
+    public override Color GetColor() => rng.NextFloat(0.8f, 1f) * Color.magenta;
     public override void Update(Cell* cellPtr)
     {
         int x = cellPtr->x;
