@@ -7,8 +7,8 @@ public unsafe class FiringMaterialUpdater : CellUpdater
     public override Color GetColor() => Color.red;
     public override void Update(Cell* cellPtr)
     {
-        cellPtr->lifetime++;
-        if (cellPtr->lifetime == 50)
+        cellPtr->generation++;
+        if (cellPtr->generation == 50)
         {
             cellPtr->cellType = CellType.Fire;
             return;

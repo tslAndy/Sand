@@ -16,7 +16,7 @@ public unsafe class FireUpdater : CellUpdater
         int x = cellPtr->x;
         int y = cellPtr->y;
 
-        if (cellPtr->lifetime == 100)
+        if (cellPtr->generation == 100)
         {
             if (Random.Range(0, 100) < 20)
                 cellPtr->cellType = CellType.Smoke;
@@ -25,7 +25,7 @@ public unsafe class FireUpdater : CellUpdater
             return;
         }
 
-        cellPtr->lifetime++;
+        cellPtr->generation++;
 
         // try to fire smth around
         for (int i = 0; i < 5; i++)
@@ -33,10 +33,10 @@ public unsafe class FireUpdater : CellUpdater
             RandomPosition.GetRandomAround(x, y, out int tx, out int ty);
 
             if (simulation.HasType(tx, ty, CanFire))
-                simulation.cellGrid[ty, tx]->cellType = CellType.FiringMaterial;
+                simulation[ty, tx]->cellType = CellType.FiringMaterial;
             else if (simulation.HasType(tx, ty, CanDetonate))
             {
-                Cell* explodedPtr = simulation.cellGrid[ty, tx];
+                Cell* explodedPtr = simulation[ty, tx];
                 explodedPtr->cellType = CellType.Explosion;
             }
         }

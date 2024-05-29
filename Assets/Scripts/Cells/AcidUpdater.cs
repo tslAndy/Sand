@@ -25,7 +25,7 @@ public unsafe class AcidUpdater : CellUpdater
 
             if (simulation.HasType(tx, ty, SwapWithAcid))
             {
-                simulation.cellGrid.SwapCells(x, y, tx, ty);
+                simulation.SwapCells(x, y, tx, ty);
                 x = tx;
                 y = ty;
                 return AcidState.Moved;

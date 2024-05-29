@@ -11,7 +11,7 @@ public unsafe class ExplosionUpdater : CellUpdater
         int x = cellPtr->x;
         int y = cellPtr->y;
 
-        int generation = cellPtr->lifetime;
+        int generation = cellPtr->generation;
 
         //ExplodeInDirection(x, y, vx, vy);
 
@@ -31,22 +31,22 @@ public unsafe class ExplosionUpdater : CellUpdater
     {
         var tx = x + dx;
         var ty = y + dy;
-        int generation = simulation.cellGrid[y, x]->lifetime;
+        int generation = simulation[y, x]->generation;
         bool isLastGeneration = generation == 20;
 
         if (!isLastGeneration &&
             simulation.HasType(tx, ty, CellType.Empty))
         {
             simulation.Add(tx, ty, CellType.Explosion);
-            Cell* explodedPtr = simulation.cellGrid[ty, tx];
+            Cell* explodedPtr = simulation[ty, tx];
             // first generation
-            explodedPtr->lifetime = generation + 1;
+            explodedPtr->generation = (byte)(generation + 1);
         }
         if (!isLastGeneration &&
             simulation.HasType(tx, ty, ThrowableByDetonation) &&
             simulation.HasType(tx + dx, ty + dy, CellType.Empty))
         {
-            simulation.cellGrid.SwapCells(tx, ty, tx + dx, ty + dy);
+            simulation.SwapCells(tx, ty, tx + dx, ty + dy);
         }
     }
 }

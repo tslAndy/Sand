@@ -31,9 +31,9 @@ public unsafe class SimulationUpdater : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 0; i < simulation.cellArray.Length; i++)
+        for (int i = 0; i < simulation.Length; i++)
         {
-            Cell* cellPtr = simulation.cellArray[i];
+            Cell* cellPtr = simulation[i];
             cellUpdaters[cellPtr->cellType].Update(cellPtr);
         }
     }

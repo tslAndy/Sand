@@ -23,7 +23,7 @@ public unsafe class SimulationDrawer : MonoBehaviour
 		if (Input.GetMouseButton(0))
 			HandleMouse();
 
-		if (simulation.cellArray.Length == 0) return;
+		if (simulation.Length == 0) return;
 
 		Parallel.ForEach(Partitioner.Create(0, colors.Length),
 			(range, loopState) =>
@@ -34,12 +34,12 @@ public unsafe class SimulationDrawer : MonoBehaviour
 		);
 
 		Parallel.ForEach(
-			Partitioner.Create(0, simulation.cellArray.Length),
+			Partitioner.Create(0, simulation.Length),
 			(range, loopState) =>
 			{
 				for (int i = range.Item1; i < range.Item2; i++)
 				{
-					Cell* cell = simulation.cellArray[i];
+					Cell* cell = simulation[i];
 					var index = ((cell->y << 9) + cell->x);
 					var color = simulationUpdater.cellUpdaters[cell->cellType].GetColor();
 					colors[index] = color;
@@ -70,7 +70,7 @@ public unsafe class SimulationDrawer : MonoBehaviour
 			if (deltaX < 0 || deltaX > 511) continue;
 			if (deltaY < 0 || deltaY > 511) continue;
 
-			Cell* cellPtr = simulation.cellGrid[deltaY, deltaX];
+			Cell* cellPtr = simulation[deltaY, deltaX];
 			bool cellIsEmpty = cellPtr->cellType == CellType.Empty;
 
 			if (_cellType == CellType.Empty && (!cellIsEmpty))

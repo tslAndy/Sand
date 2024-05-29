@@ -8,9 +8,9 @@ public unsafe class IceUpdater : CellUpdater
     public override Color GetColor() => color;
     public override void Update(Cell* cellPtr)
     {
-        if (cellPtr->lifetime < 40)
+        if (cellPtr->generation < 40)
         {
-            cellPtr->lifetime++;
+            cellPtr->generation++;
             return;
         }
 
@@ -25,7 +25,7 @@ public unsafe class IceUpdater : CellUpdater
             RandomPosition.GetRandomAround(x, y, out int tx, out int ty);
             if (simulation.HasType(tx, ty, CellType.Water))
             {
-                simulation.cellGrid[ty, tx]->cellType = CellType.Ice;
+                simulation[ty, tx]->cellType = CellType.Ice;
                 x = tx;
                 y = ty;
             }
