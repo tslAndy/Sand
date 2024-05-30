@@ -66,7 +66,7 @@ public unsafe class Simulation : MonoBehaviour
 
     public void TryAdd(int x, int y, CellType cellType, int generation = 0)
     {
-        if (!HasType(x, y, cellType)) return;
+        if (!HasType(x, y, CellType.Empty)) return;
         Add(x, y, cellType, generation);
     }
 

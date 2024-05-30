@@ -91,4 +91,5 @@ public unsafe class SimulationDrawer : MonoBehaviour
 	public void SetFire() => _cellType = CellType.Fire;
 	public void SetStone() => _cellType = CellType.Stone;
 	public void SetIce() => _cellType = CellType.Ice;
+	public void SetPlant() => _cellType = CellType.Plant;
 }

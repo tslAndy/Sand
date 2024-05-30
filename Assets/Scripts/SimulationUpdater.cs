@@ -26,6 +26,7 @@ public unsafe class SimulationUpdater : MonoBehaviour
             {CellType.Smoke, new SmokeUpdater(simulation)},
             {CellType.Stone, new StoneUpdater(simulation)},
             {CellType.Ice, new IceUpdater(simulation)},
+            {CellType.Plant, new PlantUpdater(simulation)},
         };
     }
 
