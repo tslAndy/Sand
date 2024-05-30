@@ -24,7 +24,7 @@ public unsafe class ExplosionUpdater : CellUpdater
         ExplodeInDirection(x, y, dx, dy);
 
         if (generation < 20) simulation.Remove(x, y);
-        else cellPtr->cellType = CellType.Fire;
+        else simulation.ChangeCellType(cellPtr, CellType.Fire);
     }
 
     private void ExplodeInDirection(int x, int y, int dx, int dy)
@@ -37,10 +37,7 @@ public unsafe class ExplosionUpdater : CellUpdater
         if (!isLastGeneration &&
             simulation.HasType(tx, ty, CellType.Empty))
         {
-            simulation.Add(tx, ty, CellType.Explosion);
-            Cell* explodedPtr = simulation[ty, tx];
-            // first generation
-            explodedPtr->generation = (byte)(generation + 1);
+            simulation.Add(tx, ty, CellType.Explosion, generation + 1);
         }
         if (!isLastGeneration &&
             simulation.HasType(tx, ty, ThrowableByDetonation) &&

@@ -32,13 +32,10 @@ public unsafe class FireUpdater : CellUpdater
         {
             RandomPosition.GetRandomAround(x, y, out int tx, out int ty);
 
-            if (simulation.HasType(tx, ty, CanFire))
-                simulation[ty, tx]->cellType = CellType.FiringMaterial;
-            else if (simulation.HasType(tx, ty, CanDetonate))
-            {
-                Cell* explodedPtr = simulation[ty, tx];
-                explodedPtr->cellType = CellType.Explosion;
-            }
+            if (simulation.HasType(tx, ty, CanFire, out Cell* firedPtr))
+                simulation.ChangeCellType(firedPtr, CellType.FiringMaterial);
+            else if (simulation.HasType(tx, ty, CanDetonate, out Cell* detonatedPtr))
+                simulation.ChangeCellType(detonatedPtr, CellType.Explosion);
         }
 
         simulation.TrySwap(ref x, ref y, RandomPosition.PlusMinusOne(x), y + 1, SwapWithFire);

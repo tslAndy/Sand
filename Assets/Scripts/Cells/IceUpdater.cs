@@ -23,9 +23,9 @@ public unsafe class IceUpdater : CellUpdater
         for (int i = 0; i < steps; i++)
         {
             RandomPosition.GetRandomAround(x, y, out int tx, out int ty);
-            if (simulation.HasType(tx, ty, CellType.Water))
+            if (simulation.HasType(tx, ty, CellType.Water, out Cell* waterPtr))
             {
-                simulation[ty, tx]->cellType = CellType.Ice;
+                simulation.ChangeCellType(waterPtr, CellType.Ice);
                 x = tx;
                 y = ty;
             }

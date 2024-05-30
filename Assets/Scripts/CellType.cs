@@ -13,6 +13,7 @@ public enum CellType
     Explosion = 1024,
     Smoke = 2048,
     Stone = 4096,
-    Ice = 8192
+    Ice = 8192,
+    Plant = 16384
 }
 

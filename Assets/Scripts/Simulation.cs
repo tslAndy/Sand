@@ -41,11 +41,33 @@ public unsafe class Simulation : MonoBehaviour
         return (this[y, x]->cellType & types) != 0;
     }
 
-    public void Add(int x, int y, CellType cellType)
+    public bool HasType(int x, int y, CellType types, out Cell* cellPtr)
     {
-        Cell cell = new Cell(x, y, cellType);
+        cellPtr = null;
+        if (x < 0 || x > 511 || y < 0 || y > 511) return false;
+        Cell* testPtr = this[y, x];
+        if ((testPtr->cellType & types) == 0) return false;
+        cellPtr = testPtr;
+        return true;
+    }
+
+    public void ChangeCellType(Cell* cellPtr, CellType cellType, int generation = 0)
+    {
+        cellPtr->cellType = cellType;
+        cellPtr->generation = generation;
+    }
+
+    public void Add(int x, int y, CellType cellType, int generation = 0)
+    {
+        Cell cell = new Cell(x, y, cellType, generation);
         Cell* createdPtr = AddToArray(cell);
         this[y, x] = createdPtr;
+    }
+
+    public void TryAdd(int x, int y, CellType cellType, int generation = 0)
+    {
+        if (!HasType(x, y, cellType)) return;
+        Add(x, y, cellType, generation);
     }
 
     public void Remove(int x, int y)
