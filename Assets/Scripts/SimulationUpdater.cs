@@ -27,11 +27,15 @@ public unsafe class SimulationUpdater : MonoBehaviour
             {CellType.Stone, new StoneUpdater(simulation)},
             {CellType.Ice, new IceUpdater(simulation)},
             {CellType.Plant, new PlantUpdater(simulation)},
+            {CellType.Vine, new VineUpdater(simulation)},
+            {CellType.Flower, new FlowerUpdater(simulation)},
+            {CellType.Seed, new SeedUpdater(simulation)}
         };
     }
 
     private void Update()
     {
+        Debug.Log(simulation.Length);
         for (int i = 0; i < simulation.Length; i++)
         {
             Cell* cellPtr = simulation[i];

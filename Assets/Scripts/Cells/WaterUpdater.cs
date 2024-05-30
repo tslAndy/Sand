@@ -9,7 +9,7 @@ public unsafe class WaterUpdater : CellUpdater
 
     public WaterUpdater(Simulation simulation) : base(simulation) { }
 
-    public override Color GetColor() => rng.NextFloat(0.8f, 1f) * Color.blue;
+    public override Color GetColor(Cell* cellPtr) => rng.NextFloat(0.8f, 1f) * Color.blue;
 
     public override void Update(Cell* cellPtr)
     {

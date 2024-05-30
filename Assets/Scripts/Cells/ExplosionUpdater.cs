@@ -5,7 +5,7 @@ public unsafe class ExplosionUpdater : CellUpdater
     private const CellType ThrowableByDetonation = CellType.Gas;
     public ExplosionUpdater(Simulation simulation) : base(simulation) { }
 
-    public override Color GetColor() => Color.red;
+    public override Color GetColor(Cell* cellPtr) => Color.red;
     public override void Update(Cell* cellPtr)
     {
         int x = cellPtr->x;

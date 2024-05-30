@@ -6,7 +6,7 @@ public unsafe class OilUpdater : CellUpdater
 
     public OilUpdater(Simulation simulation) : base(simulation) { }
 
-    public override Color GetColor() => rng.NextFloat(0.8f, 1f) * Color.green;
+    public override Color GetColor(Cell* cellPtr) => rng.NextFloat(0.8f, 1f) * Color.green;
     public override void Update(Cell* cellPtr)
     {
         int x = cellPtr->x;

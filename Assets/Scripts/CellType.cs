@@ -14,6 +14,9 @@ public enum CellType
     Smoke = 2048,
     Stone = 4096,
     Ice = 8192,
-    Plant = 16384
+    Plant = 16384,
+    Vine = 32768,
+    Flower = 65536,
+    Seed = 131072
 }
 

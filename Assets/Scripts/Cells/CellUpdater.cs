@@ -12,6 +12,6 @@ public unsafe abstract class CellUpdater
         this.simulation = simulation;
     }
 
-    public abstract Color GetColor();
+    public abstract Color GetColor(Cell* cellPtr);
     public abstract void Update(Cell* cellPtr);
 }

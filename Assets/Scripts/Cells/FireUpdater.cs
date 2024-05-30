@@ -10,7 +10,7 @@ public unsafe class FireUpdater : CellUpdater
 
     public FireUpdater(Simulation simulation) : base(simulation) { }
 
-    public override Color GetColor() => _color;
+    public override Color GetColor(Cell* cellPtr) => _color;
     public override void Update(Cell* cellPtr)
     {
         int x = cellPtr->x;

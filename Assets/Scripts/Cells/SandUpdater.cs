@@ -9,7 +9,7 @@ public unsafe class SandUpdater : CellUpdater
 
     public SandUpdater(Simulation simulation) : base(simulation) { }
 
-    public override Color GetColor() => Color.yellow;
+    public override Color GetColor(Cell* cellPtr) => Color.yellow;
     public override void Update(Cell* cellPtr)
     {
         int x = cellPtr->x;

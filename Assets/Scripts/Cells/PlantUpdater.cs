@@ -5,7 +5,7 @@ public unsafe class PlantUpdater : CellUpdater
     private Color color = Color.green * 0.7f;
     public PlantUpdater(Simulation simulation) : base(simulation) { }
 
-    public override Color GetColor() => color;
+    public override Color GetColor(Cell* cellPtr) => color;
 
     public override void Update(Cell* cellPtr)
     {
@@ -30,10 +30,15 @@ public unsafe class PlantUpdater : CellUpdater
             else
                 simulation.TryAdd(RandomPosition.PlusMinusOne(x), y, CellType.Plant);
         }
-        else if (cellPtr->generation < 5 && simulation.HasType(tx, ty, CellType.Empty))
+        else if (cellPtr->generation < 5)
         {
             simulation.TryAdd(tx, ty, CellType.Plant, cellPtr->generation + 1);
         }
 
+        else if (x % 4 + x % 5 == 2)
+        {
+            // in context of vine generation is length
+            simulation.TryAdd(x, y - 1, CellType.Vine, Random.Range(5, 100));
+        }
     }
 }

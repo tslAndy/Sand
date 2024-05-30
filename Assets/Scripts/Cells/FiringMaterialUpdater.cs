@@ -4,7 +4,7 @@ public unsafe class FiringMaterialUpdater : CellUpdater
 {
     public FiringMaterialUpdater(Simulation simulation) : base(simulation) { }
 
-    public override Color GetColor() => Color.red;
+    public override Color GetColor(Cell* cellPtr) => Color.red;
     public override void Update(Cell* cellPtr)
     {
         cellPtr->generation++;

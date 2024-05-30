@@ -13,7 +13,7 @@ public unsafe class SmokeUpdater : CellUpdater
 
     public SmokeUpdater(Simulation simulation) : base(simulation) { }
 
-    public override Color GetColor() => color;
+    public override Color GetColor(Cell* cellPtr) => color;
     public override void Update(Cell* cellPtr)
     {
         int x = cellPtr->x;

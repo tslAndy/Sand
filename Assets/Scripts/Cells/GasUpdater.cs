@@ -6,7 +6,7 @@ public unsafe class GasUpdater : CellUpdater
 
     public GasUpdater(Simulation simulation) : base(simulation) { }
 
-    public override Color GetColor() => Color.red;
+    public override Color GetColor(Cell* cellPtr) => Color.red;
     public override void Update(Cell* cellPtr)
     {
         int x = cellPtr->x;

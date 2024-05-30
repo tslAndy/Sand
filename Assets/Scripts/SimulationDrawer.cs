@@ -41,7 +41,7 @@ public unsafe class SimulationDrawer : MonoBehaviour
 				{
 					Cell* cell = simulation[i];
 					var index = ((cell->y << 9) + cell->x);
-					var color = simulationUpdater.cellUpdaters[cell->cellType].GetColor();
+					var color = simulationUpdater.cellUpdaters[cell->cellType].GetColor(cell);
 					colors[index] = color;
 				}
 			}
@@ -92,4 +92,5 @@ public unsafe class SimulationDrawer : MonoBehaviour
 	public void SetStone() => _cellType = CellType.Stone;
 	public void SetIce() => _cellType = CellType.Ice;
 	public void SetPlant() => _cellType = CellType.Plant;
+	public void SetSeed() => _cellType = CellType.Seed;
 }

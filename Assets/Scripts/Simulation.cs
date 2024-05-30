@@ -51,23 +51,25 @@ public unsafe class Simulation : MonoBehaviour
         return true;
     }
 
-    public void ChangeCellType(Cell* cellPtr, CellType cellType, int generation = 0)
+    public void ChangeCellType(Cell* cellPtr, CellType cellType, int generation = 0, int colorscale = 0)
     {
         cellPtr->cellType = cellType;
         cellPtr->generation = generation;
+        cellPtr->colorscale = colorscale;
     }
 
-    public void Add(int x, int y, CellType cellType, int generation = 0)
+    public Cell* Add(int x, int y, CellType cellType, int generation = 0, int colorscale = 0)
     {
-        Cell cell = new Cell(x, y, cellType, generation);
+        Cell cell = new Cell(x, y, cellType, generation, colorscale);
         Cell* createdPtr = AddToArray(cell);
         this[y, x] = createdPtr;
+        return createdPtr;
     }
 
-    public void TryAdd(int x, int y, CellType cellType, int generation = 0)
+    public Cell* TryAdd(int x, int y, CellType cellType, int generation = 0, int colorscale = 0)
     {
-        if (!HasType(x, y, CellType.Empty)) return;
-        Add(x, y, cellType, generation);
+        if (!HasType(x, y, CellType.Empty)) return null;
+        return Add(x, y, cellType, generation, colorscale);
     }
 
     public void Remove(int x, int y)
