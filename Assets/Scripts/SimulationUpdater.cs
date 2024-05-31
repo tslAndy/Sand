@@ -29,7 +29,10 @@ public unsafe class SimulationUpdater : MonoBehaviour
             {CellType.Plant, new PlantUpdater(simulation)},
             {CellType.Vine, new VineUpdater(simulation)},
             {CellType.Flower, new FlowerUpdater(simulation)},
-            {CellType.Seed, new SeedUpdater(simulation)}
+            {CellType.Seed, new SeedUpdater(simulation)},
+            {CellType.FireworkPowder, new FireworkPowderUpdater(simulation)},
+            {CellType.Firework, new FireworkUpdater(simulation)},
+            {CellType.Sparkle, new SparkleUpdater(simulation)}
         };
     }
 

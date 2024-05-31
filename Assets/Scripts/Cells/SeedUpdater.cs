@@ -9,7 +9,7 @@ public unsafe class SeedUpdater : CellUpdater
                                         CellType.Oil;
 
     // todo add plant, flower
-    private const CellType GrowOn = CellType.Sand | CellType.Flower;
+    private const CellType GrowOn = CellType.Sand | CellType.Flower | CellType.Plant;
 
     public SeedUpdater(Simulation simulation) : base(simulation) { }
 

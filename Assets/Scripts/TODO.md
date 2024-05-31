@@ -3,3 +3,4 @@
 - [ ] Colors
 - [ ] Fix acid
 - [ ] Remake fire, smoke and explosion
+- [ ] Particles thrown by explosion

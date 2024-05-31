@@ -41,6 +41,7 @@ public unsafe class Simulation : MonoBehaviour
         return (this[y, x]->cellType & types) != 0;
     }
 
+    // todo use pointer instead of coords
     public bool HasType(int x, int y, CellType types, out Cell* cellPtr)
     {
         cellPtr = null;
@@ -51,25 +52,39 @@ public unsafe class Simulation : MonoBehaviour
         return true;
     }
 
-    public void ChangeCellType(Cell* cellPtr, CellType cellType, int generation = 0, int colorscale = 0)
+    public void ChangeCellType(
+        Cell* cellPtr,
+        CellType cellType,
+        int generation = 0, int colorscale = 0,
+        int vx = 0, int vy = 0)
     {
         cellPtr->cellType = cellType;
         cellPtr->generation = generation;
         cellPtr->colorscale = colorscale;
+        cellPtr->vx = vx;
+        cellPtr->vy = vy;
     }
 
-    public Cell* Add(int x, int y, CellType cellType, int generation = 0, int colorscale = 0)
+    public Cell* Add(
+        int x, int y,
+        CellType cellType,
+        int generation = 0, int colorscale = 0,
+        int vx = 0, int vy = 0)
     {
-        Cell cell = new Cell(x, y, cellType, generation, colorscale);
+        Cell cell = new Cell(x, y, cellType, generation, colorscale, vx, vy);
         Cell* createdPtr = AddToArray(cell);
         this[y, x] = createdPtr;
         return createdPtr;
     }
 
-    public Cell* TryAdd(int x, int y, CellType cellType, int generation = 0, int colorscale = 0)
+    public Cell* TryAdd(
+        int x, int y,
+        CellType cellType,
+        int generation = 0, int colorscale = 0,
+        int vx = 0, int vy = 0)
     {
         if (!HasType(x, y, CellType.Empty)) return null;
-        return Add(x, y, cellType, generation, colorscale);
+        return Add(x, y, cellType, generation, colorscale, vx, vy);
     }
 
     public void Remove(int x, int y)
@@ -117,6 +132,7 @@ public unsafe class Simulation : MonoBehaviour
         }
     }
 
+    // todo use pointer instead of coords
     public void SwapCells(int x1, int y1, int x2, int y2)
     {
         Cell* cell1 = this[y1, x1];

@@ -1,4 +1,4 @@
-public enum CellType
+public enum CellType : uint
 {
     Empty = 1,
     Sand = 2,
@@ -17,6 +17,9 @@ public enum CellType
     Plant = 16384,
     Vine = 32768,
     Flower = 65536,
-    Seed = 131072
+    Seed = 131072,
+    FireworkPowder = 262144,
+    Firework = 524288,
+    Sparkle = 1048576
 }
 
