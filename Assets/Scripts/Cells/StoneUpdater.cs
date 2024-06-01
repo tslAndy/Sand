@@ -15,12 +15,11 @@ public unsafe class StoneUpdater : CellUpdater
     public override Color GetColor(Cell* cellPtr) => color;
     public override void Update(Cell* cellPtr)
     {
-        int x = cellPtr->x;
-        int y = cellPtr->y;
-
         for (int i = 0; i < 9; i++)
         {
-            if (simulation.TrySwap(ref x, ref y, x, y - 1, SwapWithStone)) { }
+            int x = cellPtr->x;
+            int y = cellPtr->y;
+            if (simulation.TrySwap(cellPtr, x, y - 1, SwapWithStone)) { }
             else break;
         }
     }

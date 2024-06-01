@@ -44,7 +44,7 @@ public unsafe class SparkleUpdater : CellUpdater
         for (int i = 1; i < count + 1; i++)
         {
             int tx = Mathf.RoundToInt(x0 + dx * i);
-            int ty = y0 + Mathf.RoundToInt(y0 + dy * i);
+            int ty = Mathf.RoundToInt(y0 + dy * i);
             if (cellPtr->generation == 0 || !simulation.TrySwap(ref x, ref y, tx, ty, swapWithSparkle))
             {
                 simulation.Remove(x, y);

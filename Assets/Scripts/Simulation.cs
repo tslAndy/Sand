@@ -41,7 +41,6 @@ public unsafe class Simulation : MonoBehaviour
         return (this[y, x]->cellType & types) != 0;
     }
 
-    // todo use pointer instead of coords
     public bool HasType(int x, int y, CellType types, out Cell* cellPtr)
     {
         cellPtr = null;
@@ -132,7 +131,31 @@ public unsafe class Simulation : MonoBehaviour
         }
     }
 
-    // todo use pointer instead of coords
+    public bool TrySwap(Cell* cellPtr, int x2, int y2, CellType types)
+    {
+        if (!HasType(x2, y2, types)) return false;
+        SwapCells(cellPtr, x2, y2);
+
+        return true;
+    }
+
+    public void SwapCells(Cell* cellPtr, int x2, int y2)
+    {
+        int x1 = cellPtr->x;
+        int y1 = cellPtr->y;
+
+        Cell* cell2 = this[y2, x2];
+
+        cellPtr->x = x2;
+        cellPtr->y = y2;
+
+        cell2->x = x1;
+        cell2->y = y1;
+
+        this[y2, x2] = cellPtr;
+        this[y1, x1] = cell2;
+    }
+
     public void SwapCells(int x1, int y1, int x2, int y2)
     {
         Cell* cell1 = this[y1, x1];

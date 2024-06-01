@@ -34,11 +34,11 @@ public unsafe class ExplosionUpdater : CellUpdater
         int generation = simulation[y, x]->generation;
         bool isLastGeneration = generation == 20;
 
-        if (!isLastGeneration &&
-            simulation.HasType(tx, ty, CellType.Empty))
+        if (!isLastGeneration)
         {
-            simulation.Add(tx, ty, CellType.Explosion, generation + 1);
+            simulation.TryAdd(tx, ty, CellType.Explosion, generation + 1);
         }
+
         if (!isLastGeneration &&
             simulation.HasType(tx, ty, ThrowableByDetonation) &&
             simulation.HasType(tx + dx, ty + dy, CellType.Empty))

@@ -16,14 +16,13 @@ public unsafe class SmokeUpdater : CellUpdater
     public override Color GetColor(Cell* cellPtr) => color;
     public override void Update(Cell* cellPtr)
     {
-        int x = cellPtr->x;
-        int y = cellPtr->y;
-
         for (int i = 0; i < 3; i++)
         {
+            int x = cellPtr->x;
+            int y = cellPtr->y;
             int direction = RandomPosition.PlusMinusOne(0);
-            if (simulation.TrySwap(ref x, ref y, x + direction, y + 1, SwapWithSmoke)) { }
-            else if (simulation.TrySwap(ref x, ref y, x - direction, y + 1, SwapWithSmoke)) { }
+            if (simulation.TrySwap(cellPtr, x + direction, y + 1, SwapWithSmoke)) { }
+            else if (simulation.TrySwap(cellPtr, x - direction, y + 1, SwapWithSmoke)) { }
             else
             {
                 simulation.Remove(x, y);

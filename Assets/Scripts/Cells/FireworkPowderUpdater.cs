@@ -10,12 +10,11 @@ public unsafe class FireworkPowderUpdater : CellUpdater
 
     public override void Update(Cell* cellPtr)
     {
-        int x = cellPtr->x;
-        int y = cellPtr->y;
-
         int height = Random.Range(200, 250);
         for (int i = 0; i < 9; i++)
         {
+            int x = cellPtr->x;
+            int y = cellPtr->y;
             if (simulation.HasType(x, y - 1, CellType.Fire))
             {
                 simulation.ChangeCellType(cellPtr, CellType.Firework, height);
@@ -37,9 +36,9 @@ public unsafe class FireworkPowderUpdater : CellUpdater
                 return;
             }
 
-            if (simulation.TrySwap(ref x, ref y, x, y - 1, swapWithPowder)) { }
-            else if (simulation.TrySwap(ref x, ref y, x - 1, y - 1, swapWithPowder)) { }
-            else if (simulation.TrySwap(ref x, ref y, x + 1, y - 1, swapWithPowder)) { }
+            if (simulation.TrySwap(cellPtr, x, y - 1, swapWithPowder)) { }
+            else if (simulation.TrySwap(cellPtr, x - 1, y - 1, swapWithPowder)) { }
+            else if (simulation.TrySwap(cellPtr, x + 1, y - 1, swapWithPowder)) { }
         }
 
     }

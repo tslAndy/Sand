@@ -13,7 +13,7 @@ public unsafe class FireworkUpdater : CellUpdater
         int x = cellPtr->x;
         int y = cellPtr->y;
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
             if (cellPtr->generation != 0 && simulation.TrySwap(ref x, ref y, x, y + 1, swapWithFirework))
             {

@@ -23,11 +23,8 @@ public unsafe class AcidUpdater : CellUpdater
             if (tx < 0 || tx > 511 || ty < 0 || ty > 511) return AcidState.Nothing;
 
 
-            if (simulation.HasType(tx, ty, SwapWithAcid))
+            if (simulation.TrySwap(ref x, ref y, tx, ty, SwapWithAcid))
             {
-                simulation.SwapCells(x, y, tx, ty);
-                x = tx;
-                y = ty;
                 return AcidState.Moved;
             }
 

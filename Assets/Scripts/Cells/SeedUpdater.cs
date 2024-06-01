@@ -28,9 +28,11 @@ public unsafe class SeedUpdater : CellUpdater
 
         for (int i = 0; i < 9; i++)
         {
-            if (simulation.TrySwap(ref x, ref y, x, y - 1, SwapWithSeed)) { }
-            else if (simulation.TrySwap(ref x, ref y, x - 1, y - 1, SwapWithSeed)) { }
-            else if (simulation.TrySwap(ref x, ref y, x + 1, y - 1, SwapWithSeed)) { }
+            x = cellPtr->x;
+            y = cellPtr->y;
+            if (simulation.TrySwap(cellPtr, x, y - 1, SwapWithSeed)) { }
+            else if (simulation.TrySwap(cellPtr, x - 1, y - 1, SwapWithSeed)) { }
+            else if (simulation.TrySwap(cellPtr, x + 1, y - 1, SwapWithSeed)) { }
             else break;
         }
     }

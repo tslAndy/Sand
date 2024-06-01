@@ -38,6 +38,6 @@ public unsafe class FireUpdater : CellUpdater
                 simulation.ChangeCellType(detonatedPtr, CellType.Explosion);
         }
 
-        simulation.TrySwap(ref x, ref y, RandomPosition.PlusMinusOne(x), y + 1, SwapWithFire);
+        simulation.TrySwap(cellPtr, RandomPosition.PlusMinusOne(x), y + 1, SwapWithFire);
     }
 }

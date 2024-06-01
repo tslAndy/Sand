@@ -13,19 +13,16 @@ public unsafe class MiteUpdater : CellUpdater
 
     public override void Update(Cell* cellPtr)
     {
-        int x = cellPtr->x;
-        int y = cellPtr->y;
-
         bool eaten = false;
         for (int i = 0; i < 3; i++)
         {
             if (Random.Range(0, 10) > 3) break;
-            RandomPosition.GetRandomAround(x, y, out int tx, out int ty);
+            RandomPosition.GetRandomAround(cellPtr->x, cellPtr->y, out int tx, out int ty);
             if (!simulation.HasType(tx, ty, destroyableByMite)) continue;
 
             eaten = true;
             simulation.Remove(tx, ty);
-            simulation.TrySwap(ref x, ref y, tx, ty, swapWithMite);
+            simulation.TrySwap(cellPtr, tx, ty, swapWithMite);
         }
 
         if (eaten) return;
@@ -34,7 +31,7 @@ public unsafe class MiteUpdater : CellUpdater
         {
             for (int i = 0; i < 9; i++)
             {
-                bool falledDown = simulation.TrySwap(ref x, ref y, x, y - 1, swapWithMite);
+                bool falledDown = simulation.TrySwap(cellPtr, cellPtr->x, cellPtr->y - 1, swapWithMite);
                 if (falledDown) continue;
 
                 cellPtr->vx = RandomPosition.PlusMinusOne(0);
@@ -44,13 +41,13 @@ public unsafe class MiteUpdater : CellUpdater
             return;
         }
 
-        if (cellPtr->vy > 0 && cellPtr->generation > Random.Range(5, 10))
+        if (cellPtr->vy > 0 && cellPtr->generation > Random.Range(5, 20))
             cellPtr->vy = -1;
 
-        if (cellPtr->generation > Random.Range(15, 20))
+        if (cellPtr->generation > Random.Range(25, 40))
             cellPtr->vx = 0;
 
-        if (simulation.TrySwap(ref x, ref y, x + cellPtr->vx, y + cellPtr->vy, swapWithMite))
+        if (simulation.TrySwap(cellPtr, cellPtr->x + cellPtr->vx, cellPtr->y + cellPtr->vy, swapWithMite))
             cellPtr->generation++;
         else
             cellPtr->generation = 0;
