@@ -94,4 +94,5 @@ public unsafe class SimulationDrawer : MonoBehaviour
 	public void SetPlant() => _cellType = CellType.Plant;
 	public void SetSeed() => _cellType = CellType.Seed;
 	public void SetFirework() => _cellType = CellType.FireworkPowder;
+	public void SetMite() => _cellType = CellType.Mite;
 }

@@ -9,6 +9,11 @@ public unsafe class SimulationUpdater : MonoBehaviour
 
     public Dictionary<CellType, CellUpdater> cellUpdaters;
 
+    private void Awake()
+    {
+        Application.targetFrameRate = 70;
+    }
+
     private void Start()
     {
         cellUpdaters = new()
@@ -32,7 +37,10 @@ public unsafe class SimulationUpdater : MonoBehaviour
             {CellType.Seed, new SeedUpdater(simulation)},
             {CellType.FireworkPowder, new FireworkPowderUpdater(simulation)},
             {CellType.Firework, new FireworkUpdater(simulation)},
-            {CellType.Sparkle, new SparkleUpdater(simulation)}
+            {CellType.Sparkle, new SparkleUpdater(simulation)},
+            {CellType.Mite, new MiteUpdater(simulation)}
+
+
         };
     }
 

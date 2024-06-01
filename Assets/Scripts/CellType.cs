@@ -20,6 +20,7 @@ public enum CellType : uint
     Seed = 131072,
     FireworkPowder = 262144,
     Firework = 524288,
-    Sparkle = 1048576
+    Sparkle = 1048576,
+    Mite = 2097152
 }
 

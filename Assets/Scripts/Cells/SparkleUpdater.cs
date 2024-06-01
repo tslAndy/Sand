@@ -1,6 +1,4 @@
 using System;
-using System.IO.Compression;
-using Unity.Mathematics;
 using UnityEngine;
 
 public unsafe class SparkleUpdater : CellUpdater
@@ -29,10 +27,10 @@ public unsafe class SparkleUpdater : CellUpdater
         int vx = cellPtr->vx;
         int vy = cellPtr->vy;
 
-        if (Mathf.Abs(vx) > Mathf.Abs(vy))
-            Move(cellPtr, Math.Sign(vx), vy / (float)vx, (int)MathF.Abs(vx));
+        if (Math.Abs(vx) > Math.Abs(vy))
+            Move(cellPtr, Math.Sign(vx), vy / (float)vx, Math.Abs(vx));
         else
-            Move(cellPtr, vx / (float)vy, Math.Sign(vy), (int)Math.Abs(vy));
+            Move(cellPtr, vx / (float)vy, Math.Sign(vy), Math.Abs(vy));
     }
 
     private void Move(Cell* cellPtr, float dx, float dy, int count)
@@ -45,8 +43,8 @@ public unsafe class SparkleUpdater : CellUpdater
 
         for (int i = 1; i < count + 1; i++)
         {
-            int tx = x0 + Mathf.RoundToInt(dx * i);
-            int ty = y0 + Mathf.RoundToInt(dy * i);
+            int tx = Mathf.RoundToInt(x0 + dx * i);
+            int ty = y0 + Mathf.RoundToInt(y0 + dy * i);
             if (cellPtr->generation == 0 || !simulation.TrySwap(ref x, ref y, tx, ty, swapWithSparkle))
             {
                 simulation.Remove(x, y);
