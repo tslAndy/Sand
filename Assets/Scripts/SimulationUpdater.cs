@@ -38,7 +38,8 @@ public unsafe class SimulationUpdater : MonoBehaviour
             {CellType.FireworkPowder, new FireworkPowderUpdater(simulation)},
             {CellType.Firework, new FireworkUpdater(simulation)},
             {CellType.Sparkle, new SparkleUpdater(simulation)},
-            {CellType.Mite, new MiteUpdater(simulation)}
+            {CellType.Mite, new MiteUpdater(simulation)},
+            {CellType.Ant, new AntUpdater(simulation)}
 
 
         };
