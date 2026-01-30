@@ -2,16 +2,16 @@ namespace JobSystem;
 
 public abstract class Container
 {
-    public Shitlist<int> inDegree, outDegree;
-    public Shitlist<Shitlist<JobId>> descendants;
+    public MyList<int> inDegree, outDegree;
+    public MyList<MyList<JobId>> descendants;
 
     protected Container() => Preupdate();
 
     public void Preupdate()
     {
-        inDegree    = new Shitlist<int>(8);
-        outDegree   = new Shitlist<int>(8);
-        descendants = new Shitlist<Shitlist<JobId>>(8);
+        inDegree    = new MyList<int>(8);
+        outDegree   = new MyList<int>(8);
+        descendants = new MyList<MyList<JobId>>(8);
         PreupdateInner();
     }
 

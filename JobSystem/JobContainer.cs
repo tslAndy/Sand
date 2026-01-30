@@ -3,16 +3,16 @@ namespace JobSystem;
 public class JobContainer<T> : Container
     where T : struct, IJob
 {
-    private Shitlist<T> jobs;
+    private MyList<T> jobs;
 
     public JobHandle AddJob(T job, JobHandle deps)
     {
-        Shitlist<JobId> jobIds = new Shitlist<JobId>(1);
+        MyList<JobId> jobIds = new MyList<JobId>(1);
         jobIds.Add(new JobId { type = typeof(T), index = jobs.Count });
 
         inDegree.Add(deps.jobIds.Count);
         outDegree.Add(1);
-        descendants.Add(new Shitlist<JobId>(1));
+        descendants.Add(new MyList<JobId>(1));
         jobs.Add(job);
 
         return new JobHandle { jobIds = jobIds };
@@ -34,7 +34,7 @@ public class JobContainer<T> : Container
         );
     }
 
-    protected override void PreupdateInner() => jobs = new Shitlist<T>(8);
+    protected override void PreupdateInner() => jobs = new MyList<T>(8);
 
     private struct JobData
     {

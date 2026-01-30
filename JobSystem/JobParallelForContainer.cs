@@ -2,17 +2,17 @@ namespace JobSystem;
 
 public class JobParallelForContainer<T> : Container where T: struct, IJobParallelFor
 {
-    private Shitlist<T>     jobs;
-    private Shitlist<Range> ranges;
+    private MyList<T>     jobs;
+    private MyList<Range> ranges;
 
     public JobHandle AddJob(T job, int length, int batchesCount, JobHandle deps)
     {
-        Shitlist<JobId> jobIds = new Shitlist<JobId>(1);
+        MyList<JobId> jobIds = new MyList<JobId>(1);
         jobIds.Add(new JobId { type = typeof(T), index = jobs.Count });
 
         inDegree.Add(deps.jobIds.Count);
         outDegree.Add(batchesCount);
-        descendants.Add(new Shitlist<JobId>(1));
+        descendants.Add(new MyList<JobId>(1));
         ranges.Add(new Range { length = length, batchesCount = batchesCount });
         jobs.Add(job);
 

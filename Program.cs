@@ -41,6 +41,8 @@ public class Program
 
         Raylib.UnloadTexture(texture);
         Raylib.CloseWindow();
+
+        game.Save();
     }
 
     private static void InitUI()

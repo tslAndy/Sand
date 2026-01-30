@@ -24,9 +24,8 @@ public struct Extents
 
 
     // global coords
-    public void Reset(int x, int y) => this[x, y] = DefExtent;
-
-    private static Extent DefExtent => new Extent { minX = 32, maxX = 0, minY = 32, maxY = 0 };
+    public void Reset(int x, int y) => this[x, y] = new Extent { minX = 32, maxX = 0, minY = 32, maxY = 0 }; 
+    private static Extent DefExtent => new Extent { minX = 0, maxX = 32, minY = 0, maxY = 32 };
 
     // global coords
     // TODO convert to binary operators

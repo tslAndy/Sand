@@ -32,7 +32,7 @@ public static class JobManager
                 stack[stackIndex] = stack[stack.Count - 1];
                 stack.RemoveAt(stack.Count - 1);
 
-                Shitlist<JobId> descendants = container.descendants[jobId.index];
+                MyList<JobId> descendants = container.descendants[jobId.index];
                 for (int i = 0; i < descendants.Count; i++)
                 {
                     JobId desJobId = descendants[i];

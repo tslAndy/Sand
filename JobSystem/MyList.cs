@@ -1,18 +1,18 @@
 namespace JobSystem;
 
-public struct Shitlist<T>
+public struct MyList<T>
 {
     private Allocator<T> allocator;
     private int offset, count, capacity;
 
-    public Shitlist(int capacity)
+    public MyList(int capacity)
     {
         this.allocator = AllocatorVault.GetAllocator<T>();
         this.capacity  = capacity;
         this.offset    = allocator.GetOffset(capacity);
     }
 
-    public Shitlist(Shitlist<T> first, Shitlist<T> second)
+    public MyList(MyList<T> first, MyList<T> second)
     {
         allocator = AllocatorVault.GetAllocator<T>();
         capacity  = first.capacity + second.capacity;
