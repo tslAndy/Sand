@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FpsCounter" Collapsed="true">
+    <Position X="12" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAAAACAAAAAAAAAAAAAQAAEAAAEAIBQAAAAAAAA=</HashCode>
+      <FileName>FpsCounter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game" Collapsed="true">
+    <Position X="13.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAoAAAAAACAAACAAAAAAEAAAAAACAQBAAIAAAAAA=</HashCode>
+      <FileName>Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GUI" Collapsed="true">
+    <Position X="8.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQAAAAAAEAAAAAQIEAAAAAAAAQAoAAAQEAAAIAAAAA=</HashCode>
+      <FileName>GUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ButtonData" Collapsed="true">
+    <Position X="10.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAAAAAAAAAAAAAAIQAhgAQgAAgA=</HashCode>
+      <FileName>GUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Program" Collapsed="true">
+    <Position X="13.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAABgAAAAAAAAAAAQAkAAAAAAAIAAAABAAgAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PTypeCombExtensions" Collapsed="true">
+    <Position X="8.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>PTypeCombExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SaveSystem" Collapsed="true">
+    <Position X="10.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SaveSystem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JobSystem.Allocator" Collapsed="true">
+    <Position X="3.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>JobSystem\Allocator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JobSystem.Allocator&lt;T&gt;" Collapsed="true">
+    <Position X="3.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgACAAAAAAAAgAAAAAAAQgQAAAAAAA=</HashCode>
+      <FileName>JobSystem\Allocator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JobSystem.AllocatorVault" Collapsed="true">
+    <Position X="8.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAEAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>JobSystem\AllocatorVault.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JobSystem.Container" Collapsed="true">
+    <Position X="5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAIAAAAAAAAAAAAAAAAAAEEAAAAAAAQAAACAAAAA=</HashCode>
+      <FileName>JobSystem\Container.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JobSystem.JobContainer&lt;T&gt;" Collapsed="true">
+    <Position X="6" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAABAAEAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>JobSystem\JobContainer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JobSystem.JobExtensions" Collapsed="true">
+    <Position X="10.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>JobSystem\JobExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JobSystem.JobManager" Collapsed="true">
+    <Position X="12" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAIAAAgAABAAAAAAAAIAAABAAAAAAAAA=</HashCode>
+      <FileName>JobSystem\JobManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JobSystem.JobParallelForContainer&lt;T&gt;" Collapsed="true">
+    <Position X="3.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAIAAAAAAAAAAAAAABAAEAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>JobSystem\JobParallelForContainer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Activity" Collapsed="true">
+    <Position X="8.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Activity.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChunkJob" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAACARABAAAAAAAAAAAAAAAQAABAAAgAAA=</HashCode>
+      <FileName>ChunkJob.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Struct>
+  <Struct Name="Extent" Collapsed="true">
+    <Position X="12" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAA=</HashCode>
+      <FileName>Extent.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Extents" Collapsed="true">
+    <Position X="13.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAADAAACAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Extents.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Logic" Collapsed="true">
+    <Position X="12" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CASABAAAABAACAAACAAgAEgAAEUAAAAAAAQAABAQAFA=</HashCode>
+      <FileName>Logic.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Point" Collapsed="true">
+    <Position X="8.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAABAAAEAAAQAABAAAA=</HashCode>
+      <FileName>Point.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="JobSystem.JobHandle" Collapsed="true">
+    <Position X="8.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAABAAAAAAA=</HashCode>
+      <FileName>JobSystem\JobHandle.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="JobSystem.JobId" Collapsed="true">
+    <Position X="10.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAABAAA=</HashCode>
+      <FileName>JobSystem\JobId.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="JobSystem.MyList&lt;T&gt;" Collapsed="true">
+    <Position X="13.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAKAAAAAAAAAAAAADAIAAAQAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>JobSystem\MyList.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="JobSystem.IJob" Collapsed="true">
+    <Position X="8.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>JobSystem\IJob.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="JobSystem.IJobParallelFor" Collapsed="true">
+    <Position X="10.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>JobSystem\IJobParallelFor.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="PType" Collapsed="true">
+    <Position X="8.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAEAAQAAAAAAAQCIAAAAAAAAkAAQQEAAAAAQAQBA=</HashCode>
+      <FileName>PType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PTypeComb" Collapsed="true">
+    <Position X="10.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAEABQAAAAAAAQAIAAAAEAgAgAIQQEAAAAAQAQBA=</HashCode>
+      <FileName>PTypeComb.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

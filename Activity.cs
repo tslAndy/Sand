@@ -22,16 +22,19 @@ public struct Activity
 
             if (!value)
             {
-                activity[x] &= ~mask;
+                Interlocked.And(ref activity[x], ~mask);
+                // activity[x] &= ~mask;
                 return;
             }
 
             mask |= (mask << 1) | (mask >> 1);
             activity[x] |= mask;
             if (x - 1 >= 0)
-                activity[x - 1] |= mask;
+                Interlocked.Or(ref activity[x - 1], mask);
+            // activity[x - 1] |= mask;
             if (x + 1 < 32)
-                activity[x + 1] |= mask;
+                Interlocked.Or(ref activity[x + 1], mask);
+            // activity[x + 1] |= mask;
 
             // TODO check if Interlocked is required here
         }
